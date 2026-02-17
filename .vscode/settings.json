@@ -1,0 +1,63 @@
+{
+    // Default citation backend and labels
+    "latex-workshop.intellisense.citation.backend": "biblatex",
+    "latex-workshop.intellisense.citation.label": "title",
+
+    // Spellright configuration
+    "spellright.language": ["en"],
+    "spellright.documentTypes": ["markdown", "plaintext"],
+
+    // LaTeX tools
+    "latex-workshop.latex.tools": [
+        {
+            "name": "xelatex",
+            "command": "xelatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
+            ]
+        },
+        {
+            "name": "biber",
+            "command": "biber",
+            "args": ["%DOCFILE%"]
+        },
+        {
+            "name": "pdflatex",
+            "command": "pdflatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
+            ]
+        },
+        {
+            "name": "bibtex",
+            "command": "bibtex",
+            "args": ["%DOCFILE%"]
+        }
+    ],
+
+    // LaTeX recipes — simplified to prevent double compilation
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "XeLaTeX + Biber",
+            "tools": ["xelatex", "biber", "xelatex", "xelatex"]
+        },
+        {
+            "name": "XeLaTeX",
+            "tools": ["xelatex"]
+        },
+        {
+            "name": "pdfLaTeX",
+            "tools": ["pdflatex"]
+        }
+    ],
+
+    // Default recipe to use when building
+    "latex-workshop.latex.recipe.default": "XeLaTeX + Biber",
+    "latex-workshop.latex.autoBuild.run": "never"
+}
