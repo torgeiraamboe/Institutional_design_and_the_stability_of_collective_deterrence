@@ -18,12 +18,12 @@ More precicely, one player -- often called the sender -- has some private inform
 
 \section{The model}
 
-Our model adopts this basic structure of a signalling game, as presented above, where we assume one of the players to be a coalition of multiple states $\C = \{1, 2, \dots, n\}$. The other player is some potential attacking adversarial actor $\A$. The adversary $\A$ has a \emph{type}, $T \in \{0,1\}$, where $1$ represents being agressive -- actively planning an attack -- and $0$ represents a benign adversary. The coalition $\C$ holds a common prior $\pi = p(T=1) \in (0,1)$, describing their belief that $\A$ has type $1$.
+Our model adopts this basic structure of a signalling game, as presented above, where we assume one of the players to be a coalition of multiple states $\C = \{1, 2, \dots, n\}$. The other player is some potential attacking adversarial actor $\A$. The adversary $\A$ has a \emph{type}, $T \in \{0,1\}$, where $1$ represents being agressive -- actively planning an attack -- and $0$ represents a benign adversary. The coalition $\C$ holds a common prior $\pi = \Pr(T=1) \in (0,1)$, describing their belief that $\A$ has type $1$.
 
 If the adversary $\A$ attacks, i.e. $T=1$, each member $i$ of the coalition $\C$, recieves a binary warning signal $s_i \in \{0,1\}$, giving a probability
-\[p_i = p(s_i = 1 \mid T=1).\]
+\[p_i = \Pr(s_i = 1 \mid T=1).\]
 If the adversary is of type $T=0$, then coalition members recieve false alarms with probability
-\[q_i = p(s_i = 1 \mid T=0).\]
+\[q_i = \Pr(s_i = 1 \mid T=0).\]
 We assume that signals are independent across members. 
 
 Each coalition member $i\in \C$ then decides on a binary vote $v_i \in \{0,1\}$, interpreted as their vote towards authorizing retaliation. 
@@ -49,16 +49,16 @@ Most viable voting rules are formalizable in this framework, like the majority r
 \subsection{Retaliation probabilities}
 
 Assuming the attacker type is $T=1$, retaliation will occur if the weighted number of coalition members recieving the signal meets the threshold. Because these signals are independent, the probability of retaliation is 
-\[R(\tau) = p\left(\sum_{i=1}^n w_i v_i \geq \tau \mid T=1\right).\]
+\[R(\tau) = \Pr\left(\sum_{i=1}^n w_i v_i \geq \tau \mid T=1\right).\]
 This function captures the \emph{deterrence credibility} of the coalition $\C$. In other words it is the probability that an attack by the adversary $\A$ triggers a retaliatory response. 
 
 Similarly, if the adversary's type is $T=0$, then retaliation is accidental, with probability 
-\[F(\tau) = p\left(\sum_{i=1}^n w_i v_i \geq \tau \mid T=0\right).\]
+\[F(\tau) = \Pr\left(\sum_{i=1}^n w_i v_i \geq \tau \mid T=0\right).\]
 This function captures the coalition's \emph{escalation risk}, i.e., the probability that the coalition accidentaly authorizes a response when there had been no attack. This could happen if, for example, another actor than $\A$ was responsible for an attack on the coalition, or that an accident is interpreted as an attack. 
 
 Notice that a lowe threshold $\tau$ increases the probability of both deterrence and accidental use. 
 
-In the simple case that each coalition member $i$ has an equal weight, say $w_i = 1$ for all $i$, and the threshold $\tau$ is a positive integer less than or equal to $n$, then these probabilities become binomial, with 
+In the simple case that each coalition member $i$ has an equal weight, say $w_i = 1$ for all $i$, as well as equal probabilities $p_i$, and the threshold $\tau$ is a positive integer less than or equal to $n$, then these probabilities become binomial, with 
 \[R(\tau) = \sum_{k=\tau}^{n} \binom{n}{k} p^{k} (1-p)^{n-k},\]
 and similarly 
 \[F(\tau) = \sum_{k=\tau}^{n} \binom{n}{k} q^{k} (1-q)^{n-k}.
@@ -66,6 +66,22 @@ and similarly
 The often used majority rules and consensus rules are both of this nature, and these closed formula allows us to study these in slightly more detail. 
 
 \subsection{Costs and benefits}
+
+The optimal outcome of the adversay actor $\A$ is to attack and suffer no consequences. The optimal outcome for the coalition $\C$ is that no attack occurs. 
+
+In order for an attack to be of interest, there has to be a percieved benefit for $\A$. In the situation of optimal outcome for $\A$, where it attacks and no retaliation occurs, we denote this benefit by $B$. We assume this value to be a number, for example monetary benefit or some other measure of benefit that $\A$ deems desirable. If retaliation occurs, then $\A$ suffers a cost $C$, which we assume is of comparable type to the benefit $B$. 
+
+The expected payoff for $\A$ not attacking is naturally $0$. The probability of retaliation by $\C$ is given as above by $R(\tau)$, hence the expected payoff for attacking is 
+\[(1-R(\tau))B-R(\tau)C.\]
+Assuming rationality, the adversary state attacks if it deems the expected payoff to be better for attacking versus not attacking, in other words if the above value is greater than $0$. Rearanging the terms gives that $\A$ attacks if 
+\[R(\tau)\leq \frac{B}{B+C}.\]
+This fraction is the adversary actor $\A$'s \emph{deterrence threshold}, and we denote it for simplicity by $\bR := \frac{B}{B+C}$. This means we have two actions:
+\begin{enumerate}
+    \item If $R(\tau)\leq \bR$, then the adversary actor $\A$ attacks;
+    \item If $R(\tau)\geq \bR$, then the coalition $\C$'s collective deterrence has succeeded. 
+\end{enumerate}
+
+
 
 
 
