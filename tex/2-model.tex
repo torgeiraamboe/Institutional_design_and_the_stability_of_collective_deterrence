@@ -18,21 +18,22 @@ Social choice functions are mathematical models for ranking a set of alternative
 Social choice functions can be either \emph{cardinal} or \emph{ordinal}, \citeme. Ordinal functions only use the relative ordering of social states to compute the best preferred state according to some mathamatical rule. On the other hand, cardinal functions use specific values attached to each social state, and hence is able to compute not just which state is preferred, but how much it is preferred to the other states. It is the former, the ordinal choice functions, that are most often used in public voting and electoral systems, and also the type of function we will use in this paper. 
 
 \subsubsection{Threshold rules}
+\label{ssec:threshold-rules}
 The most frequently used voting rule is the \emph{majority rule}, stating the the preferred choice between two options is the one chosen by more than half of the voters \citeme. In mathematical terms, 
 \[f(v;w) = 
 \begin{cases}
-    1, &\sum_{i=1}^{n} v_i > \frac{n}{2}  \\
+    1, &\displaystyle \sum_{i=1}^{n} v_i > \frac{n}{2}  \\
     0, & \text{else}.
 \end{cases}
 \]
 By varying the threshold for the rule outputing a $1$, we also vary the choice function. For example, the consensus rule, used for example in NATO \citeme, states that the preferred choice between two options is the one chosen by \emph{all} voters:
 \[f(v;w) = 
 \begin{cases}
-    1, &\sum_{i=1}^{n} v_i = n  \\
+    1, &\displaystyle \sum_{i=1}^{n} v_i = n  \\
     0, & \text{else}.
 \end{cases}
 \]
-Similarly, chosing a threshold $frac{2}{3}$ gives the {qualified majority rule} and chosing $\frac{3}{4}$ gives the \emph{supermajority rule}. 
+Similarly, chosing a threshold $\frac{2}{3}$ gives the {qualified majority rule} and chosing $\frac{3}{4}$ gives the \emph{supermajority rule}. 
 
 \section{The model}
 
