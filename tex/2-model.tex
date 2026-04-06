@@ -6,40 +6,49 @@ Our model exists as a combination of two much studied mathematical models: signa
 \subsection{Signalling games}
 Signalling games are dynamic Bayesian games, first studied in relation to learning by Lewis \citeme. For a more modern treatment see \citeme, and for deterrence specific signalling theory see \citeme. 
 
-In a signalling game the players have incomplete information about the initial situation, and the game unfolds sequentially over time, with actions known to the other players \citeme. More precicely, one player -- often called the sender -- has some private information about the state of the world, an takes an observable action $S$, called the signal, after which another player -- often called the reciever -- updates their beliefs about the world and chooses an action. 
+In a signalling game the players have incomplete information about the initial situation, and the game unfolds sequentially over time, with actions known to the other players \citeme. More precisely, one player -- often called the sender -- has some private information about the state of the world, and takes an observable action $S$, called the signal, after which another player -- often called the receiver -- updates their beliefs about the world and chooses an action. The private information of each player is called the \emph{type}. 
 
 In our case of deterrence, incomplete information is essential; the uncertainties around the opponents resolve lies at the heart of the mechanism making deterrence a viable strategy. 
 
-Define perfect Bayesian equilibria.
+In non-cooperative game theory, Nash equilibria are the standard solution concept for determining optimal strategies. In signalling games, however, one usually needs more refined concept, due to the players not knowing the beliefs of the other players correctly. These are called \emph{perfect Bayesian equilibria}, see \citeme. 
+
+We will, however, not solve for this solution concept in this paper, as our game will be of a deliberately simple nature where this full generality is unnecessary. Instead we will use \emph{attack conditions}, which are assignments of simple actions to the type of the players. These are based on incomplete-information thresholds in crisis bargaining, see for example \citeme, and is a standard simple way of studying simple strategic actions. 
+%Fearon 1995
+
+%The standard solution concept for signalling games are \emph{perfect Bayesian equilibria} (PBE), which are also always Nash equilibria \citeme. A PBE consists of \emph{strategies} and \emph{beliefs}. These have to follow the rules of \emph{sequential rationality}, where each strategy is optimal according to the associated belief, and \emph{consistency}, where beliefs are updated by the strategies according to Bayes rule. 
+
+%In essence, a PBE is an assignment to a set of actions and beliefs to each possible type. If all types are assigned the same set of actions and beliefs, it is called \emph{pooling}, and if it sends each type to different actions and beliefs, then it is called \emph{separating}. 
 
 \subsection{Social choice functions}
-Social choice functions are mathematical models for ranking a set of alternatives, often called \emph{social states}, by their collective desirability -- combining the independent preferences of the individual into a common ``will'' of the people. Early versions were studied by Condorcet and Llull, \citeme and \citeme, but the modern theory now in use is often attributed to Arrow's work \citeme. 
+\label{sec:social-choice-functions}
 
-Social choice functions can be either \emph{cardinal} or \emph{ordinal}, \citeme. Ordinal functions only use the relative ordering of social states to compute the best preferred state according to some mathamatical rule. On the other hand, cardinal functions use specific values attached to each social state, and hence is able to compute not just which state is preferred, but how much it is preferred to the other states. It is the former, the ordinal choice functions, that are most often used in public voting and electoral systems, and also the type of function we will use in this paper. 
+Social choice functions are mathematical models for ranking a set of alternatives, often called \emph{social states}, by their collective desirability -- combining the independent preferences of the individual into a common ``will'' of the people. Early versions were studied by Condorcet and Llull, \citeme and \citeme, but the modern theory now in use is often attributed to Arrow's work \citeme -- see \citeme for an introduction. 
 
-\subsubsection{Threshold rules}
-\label{ssec:threshold-rules}
-The most frequently used voting rule is the \emph{majority rule}, stating the the preferred choice between two options is the one chosen by more than half of the voters \citeme. In mathematical terms, 
+Social choice functions can be either \emph{cardinal} or \emph{ordinal}, \citeme. Ordinal functions only use the relative ordering of social states to compute the best preferred state according to some mathamatical rule. On the other hand, cardinal functions use specific values attached to each social state, and hence is able to compute not just which state is preferred, but how much it is preferred to the other states. It is the former, the ordinal choice functions, that are most often used in public voting and electoral systems, and also the type of function we will use in this paper. Our needs are also very simple, as our list of potential outcomes will be binary, hence we focus only on these in the following examples. 
+
+The most frequently used voting rule is the \emph{majority rule}, stating the preferred choice between two options is the one chosen by more than half of the voters \citeme. In mathematical terms, 
 \[f(v;w) = 
 \begin{cases}
     1, &\displaystyle \sum_{i=1}^{n} v_i > \frac{n}{2}  \\
     0, & \text{else}.
 \end{cases}
 \]
-By varying the threshold for the rule outputing a $1$, we also vary the choice function. For example, the consensus rule, used for example in NATO \citeme, states that the preferred choice between two options is the one chosen by \emph{all} voters:
+By varying the threshold for the rule outputing a $1$, we also vary the choice function. For example, the consensus rule, used for example when NATO votes on shared policies and solutions \citeme, states that the preferred choice between two options is the one chosen by \emph{all} voters:
 \[f(v;w) = 
 \begin{cases}
     1, &\displaystyle \sum_{i=1}^{n} v_i = n  \\
     0, & \text{else}.
 \end{cases}
 \]
-Similarly, chosing a threshold $\frac{2}{3}$ gives the {qualified majority rule} and chosing $\frac{3}{4}$ gives the \emph{supermajority rule}. 
+This is essentially a voting scheme in which every voter has a veto right. Choosing other thresholds, like $\frac{2}{3}$ gives the {qualified majority rule} and choosing $\frac{3}{4}$ gives the \emph{supermajority rule}. 
+
+There are also many other voting schemes, like the \emph{dictatorial} scheme, where only one voter has a say and always completely determines the outcome. The restricted class of social choice functions used in the model is described in \cref{ssec:weighted-threshold-functions}. 
 
 \section{The model}
-
+\label{sec:the-model}
 Our model adopts this basic structure of a signalling game, as presented above, where we assume one of the players to be a coalition consisting of multiple states $\C = \{1, 2, \dots, n\}$. The other player is some potential attacking adversarial actor $\A$. Before we explain the individual parts, we summary the sequence of events: 
 \begin{enumerate}
-    \item the coalition has a predetermined fixed social choice function $f$, which is publically known;
+    \item the coalition has a predetermined fixed social choice function $f$, which is publicly known;
     \item nature draws aversary type $T$;
     \item nature draws signals $s_i$ for each coalition member;
     \item adversary actor $\A$ chooses to attack or not based on the above information;
@@ -48,18 +57,23 @@ Our model adopts this basic structure of a signalling game, as presented above, 
 
 
 \subsection{Types and signals}
-The adversary $\A$ has a \emph{type}, $T \in \{0,1\}$, where $1$ represents being agressive -- actively planning an attack -- and $0$ represents a benign adversary. More precisely, this is supposed to signify the intent to attack; if $T=1$ then $\A$ intends to attack unless deterred, and if $T=0$, then $\A$ prefers peace, but might still launch small probing attacks if the probability of retaliation is low enough. The coalition has a shared prior belief $\pi = \Pr(T=1)$. 
+The adversary $\A$ has a \emph{type}, $T \in \{0,1\}$, where $1$ represents being aggressive -- actively planning an attack -- and $0$ represents a benign adversary. More precisely, this is supposed to signify the intent to attack; if $T=1$ then $\A$ intends to attack unless deterred, and if $T=0$, then $\A$ prefers peace, but might still launch small probing attacks if the probability of retaliation is low enough. The coalition has a shared prior belief $\pi = \Pr(T=1)$. 
 
-Each member $i$ of the coalition $\C$ has a binary signal $s_i \in \{0,1\}$, interpreted as its private stance on whether to retaliate or not, given that $\A$ attacks. This is dependent on their belief of the type of $\A$, giving a probability
+Each member $i$ of the coalition $\C$ has a binary signal $s_i \in \{0,1\}$, which is understood as a reduced-form decision-relevant indicator, summarizing both informational assessments about the adversary $\A$ and the member's willingness to retaliate. This is dependent on their belief of the type of $\A$, giving a probability
 \[p_i = \Pr(s_i = 1 \mid T=1)\]
-for whether coalition member $i$ will vote to retaliate or not. Similarly, coalition members might recieve false alarms, which gives a probability
+for whether coalition member $i$ will vote to retaliate or not. Similarly, coalition members might receive false alarms, which gives a probability
 \[q_i = \Pr(s_i = 1 \mid T=0)\]
-of a retaliatiatory strike based on erroneous information. We assume that signals and probabilities are independent across members. 
+of a retaliatory strike based on erroneous information. 
+
+\begin{remark}
+    We assume here that signals and probabilities are independent across members, even though this is highly unlikely in a real scenario. In an actual coalition, information and intelligence is shared, discussions are held and decision-makers are influenced by other members. This said, the choice allows us to gain computational power and simplicity. With our focus on understanding the underlying \emph{mechanisms} and not be as true-to-reality as possible, we feel that this simplification is sufficiently justified. 
+\end{remark} 
 
 In the case of an attack, each coalition member $i\in \C$ then decides on a binary vote $v_i \in \{0,1\}$, interpreted as their vote towards authorizing retaliation. In order to focus this paper on the institutional mechanisms, and not on whether the coalition members try to strategize for their own gain, we assume that $v_i = s_i$, which means that we assume the actors to vote truthfully based on their own intelligence assessments and internal stance. 
 
 \subsection{Weighted threshold functions}
-The coalition is assumed to have a publically known decision rule, formalized by a social choice function $f$. In order to be able to analyze the behaviour of our signalling game with respect to such a function, we need to restrict to a class of viable rules. Fist, we assume a binary outcome, $1$ representing coalition retaliation and $0$ representing no retaliation. Second, we assume the choice function $f$ to be a weighted threshold rule. This means that each coalition member $i$ is assigned a weight $w_i \in \R$ dependent on the context of the attack, and that there is a threshold $\tau \in \R$, such that the aggregated vote of the coalition is $1$ if the weighted sum of the individual members votes exceeds the threshold. This weight scheme is meant to include the possibility that the attacked country in the coalition gets a vote that counts more towards the total, or that frontline countries have a larger say, or that a country has far better ISR capabilities etc. 
+\label{ssec:weighted-threshold-functions}
+The coalition is assumed to have a publicly known institutional design, specifically a decision rule formalized by a social choice function $f$. In order to be able to analyze the behaviour of our signalling game with respect to such a function, we need to restrict to a class of viable rules. Fist, we assume a binary outcome, $1$ representing coalition retaliation and $0$ representing no retaliation. Second, we assume the choice function $f$ to be a weighted threshold rule. This means that each coalition member $i$ is assigned a weight $w_i \in \R$ dependent on the context of the attack, and that there is a threshold $\tau \in \R$, such that the aggregated vote of the coalition is $1$ if the weighted sum of the individual members votes exceeds the threshold. This weight scheme is meant to include the possibility that the attacked country in the coalition gets a vote that counts more towards the total, or that frontline countries have a larger say, or that a country has far better ISR capabilities etc. 
 
 Formally, then, given a list of votes coalition individual votes $v=(v_1, v_2, \dots, v_n)$, and a weight scheme $w=(w_1, \dots, w_n)$, we have 
 \[
@@ -72,13 +86,14 @@ f(v;w) =
 Most viable voting rules are formalizable in this framework, like the majority rule, consensus rule, dictatorship, qualified majority, veto players, etc. There are also some decision rules that are not possible to model in this framework, like multi-stage rules, lexicographical rules, non-monotonic rules and randomized rules. However, such rules are very unlikely to be viable for choosing a retaliation action, hence our focus on weighted threshold rules. 
 
 \subsection{Retaliation probabilities}
-Assuming $\A$ attacks, retaliation will occur if the weighted number of coalition members recieving the signal meets the threshold. Because these signals are independent, the probability of retaliation is 
-\[R(\tau) = \Pr\left(\sum_{i=1}^n w_i v_i \geq \tau \mid T=1 \right).\]
+Assuming $\A$ attacks, retaliation will occur if the weighted number of coalition members receiving the signal meets the threshold. We denote the probability of retaliation by
+\[R(\tau) = \Pr\left(\sum_{i=1}^n w_i v_i \geq \tau \mid T=1 \right)\]
 This function captures the \emph{deterrence credibility} of the coalition $\C$. In other words it is the probability that an attack by the adversary $\A$ triggers a retaliatory response. 
 
 Similarly, if the adversary does \emph{not} attack, then retaliation is accidental, with probability 
-\[F(\tau) = \Pr\left(\sum_{i=1}^n w_i v_i \geq \tau \mid T=0\right).\]
-This function captures the coalition's \emph{escalation risk}, i.e., the probability that the coalition accidentally authorizes a response when there had been no attack. This could happen if, for example, another actor than $\A$ was responsible for an attack on the coalition, or that an accident is interpreted as an attack. 
+\[F(\tau) = \Pr\left(\sum_{i=1}^n w_i v_i \geq \tau \mid T=0\right)\]
+This function captures the coalition's \emph{escalation risk}, i.e., the probability that the coalition accidentally authorizes a response. This could happen if, for example, another actor than $\A$ was responsible for an attack on the coalition, or that an accident is interpreted as an attack, as explored in multiple wargames, see for example \citeme. 
+% BBC wargame ?     
 
 \begin{example}
     \label{ex:binomial}
@@ -92,44 +107,48 @@ The often used majority rules and consensus rules are both of this nature.
 
 
 \subsection{Costs and benefits}
-The preferred outcome of the adversay actor $\A$ is to attack and suffer no consequences. The preferred outcome for the coalition $\C$ is that no attack occurs. 
+The preferred outcome of the adversary actor $\A$ is to attack and suffer no consequences. The preferred outcome for the coalition $\C$ is that no attack occurs. 
 
-In order for an attack to be of interest, there has to be a percieved benefit for $\A$. In the situation of preferred outcome for an adversary $\A$ of aggressive type $T=1$, where it attacks and no retaliation occurs, we denote this benefit by $B_1$. We assume this value to be a number, for example monetary benefit or some other measure of benefit that $\A$ deems desirable. If retaliation occurs, then $\A$ suffers a cost $C_1$, which we assume is of comparable type to the benefit $B_1$. 
+In order for an attack to be of interest, there has to be a perceived benefit for $\A$. In the situation of preferred outcome for an adversary $\A$ of aggressive type $T=1$, where it attacks and no retaliation occurs, we denote this benefit by $B_1$. We assume this value to be a number, for example monetary benefit or some other measure of benefit that $\A$ deems desirable. If retaliation occurs, then $\A$ suffers a cost $C_1$, which we assume is of comparable type to the benefit $B_1$. 
 
 Similarly, if the adversary has benign type $T=0$, then there might still be a small benefit $B_0$ for initiating an attack, if the probability of retaliation is small enough. This tries to capture low-stakes provocations and probing actions. Similarly, there is a cost $C_0$. These are assumed to be smaller than the payoffs for the aggressive type, giving inequalities 
 \[B_0 < B_1 \text{ and } C_0 < C_1.\]
 
-We can then compute the expected payoffs for a adversary of a given type. The probability of retaliation by $\C$ is given as above by $R(\tau)$, hence the expected payoff for $\A$ with type $T=1$ for attacking is 
+We can then compute the expected payoffs for an adversary of a given type. The probability of retaliation by $\C$ is given as above by $R(\tau)$, hence the expected payoff for $\A$ with type $T=1$ for attacking is 
 \[E_{T=1}(\attack) = (1-R(\tau))B_1-R(\tau)C_1,\]
 and similarly 
 \[E_{T=0}(\attack) = (1-R(\tau))B_0-R(\tau)C_0.\]
 
 
-\subsection{The equilibria}
+\subsection{Attack conditions}
 
-As our model is a very simple from a game theoretical perspective, the equilibria are quite easy to find. In our model, only $\A$ is a strategic actor, who makes a choice of an action based on some information -- the coalition $\C$ does not perform a strategic action, it is decided upon by their predetermined institutional design. 
+As our model is very simple from a game-theoretical perspective, the attack conditions are quite easy to find. In our model, only $\A$ is a strategic actor, who makes a choice of an action based on some information -- the coalition $\C$ does not perform a strategic action, it is decided upon by their predetermined institutional design. 
 
 Assuming rationality, the adversary state attacks if it deems the expected payoff to be greater than $0$. Rearanging the terms gives that $\A$ of type $T=1$ attacks if and only if
 \[R(\tau)< \frac{B_1}{B_1+C_1},\]
 and that $\A$ of type $T=0$ attacks if and only if
 \[R(\tau)< \frac{B_0}{B_0+C_0}.\]
 
-These fractions give the adversary actor $\A$'s \emph{deterrence thresholds} and \emph{deterrence intervals}. For simplicity, denote by $\bR_1 := \frac{B_1}{B_1+C_1}$ and $\bR_0 = \frac{B_0}{B_0+C_0}$. By the inequalities above, we get $\bR_0 < \bR_1$. This means we have three possibilities, which corresponds to the three possible equilibrium regions:
+\begin{remark}
+    This setup deliberately collapses the coalition's response into a single probabilistic parameter. This is done to later allow us to isolate the contribution from the institutional design to this parameter.
+\end{remark}
+
+These fractions give the adversary actor $\A$'s \emph{deterrence thresholds} and \emph{deterrence intervals}. For simplicity, denote by $\bR_1 := \frac{B_1}{B_1+C_1}$ and $\bR_0 = \frac{B_0}{B_0+C_0}$. By the inequalities above, we get $\bR_0 < \bR_1$. This means we have three possibilities, which corresponds to the three possible regions:
 \begin{enumerate}
     \item if $R(\tau)< \bR_0$, then the adversary actor $\A$ attacks, no matter its type;
     \item if $\bR_0 < R(\tau) <\bR_1$, then a benign adversary is deterred, but an aggressive one attacks;
     \item if $R(\tau)> \bR_1$, then the coalition $\C$'s collective deterrence has succeeded in deterring also an aggressive adversary. 
 \end{enumerate}
 
-The Bayesian updating of beliefs are trivially satisfied by the fact that the coalition is not a strategic actor in this game. We simply define the coalition's posterior belief $\Pr(T=1 \mid \attack)$ to update according to Bayes rule. 
-
-These three strategies and beliefs constitute perfect Bayesian equilibria, as the coalition's behavior is determined by the weights $w$ and the threshold $\tau$, and the adversary's actions satisfies sequential rationality given its beliefs about the probability of retaliation $R(\tau)$. The first and last regions above means that the corresponding equilibria are both \emph{pooling}, while the second is a \emph{separating} equilibrium. They are also the only possible ones, and thus yields a full classification. 
+\begin{remark}
+    We will not use this in any degree, but these three strategies and beliefs constitute the perfect Bayesian equilibria for this game. The first and last regions above give pooling equilibria, while the second is a \emph{separating} equilibrium. They are also the only possible ones, and thus yields a full classification. 
+\end{remark}
 
 \begin{remark}
     The costs $C_1$ and $C_0$ depends on the coalition $\C$'s available deterrence technology. For example, having strategic nuclear weapons significantly increases the costs of retaliation for the adversary $\A$. As discussed in the introduction, new nuclear alliances are prohibited by the Non-Proliferation Treaty \citeme. But, in certain situations and contexts, it is possible to circumvent this, or alternatively use other available or future technologies. We can then study two different costs -- one with and one without sufficient deterrence technologies -- and see how this affects the equilibria. Doing this reveals the natural outcome: larger costs means smaller expected payoffs, and larger intervals where deterrence is successful. 
 \end{remark}
 
-As the game is very simple, it is not the equilibria that are interesting. The interesting question about our setup is, in our oppinion, trying to determine which social choice functions that yield the best deterrence properties for the coalition $\C$. In the next section we attempt to analyze this question. 
+As the game is very simple, it is not only the attack conditions that are interesting. The interesting question about our setup is, in our opinion, trying to determine which social choice functions that yield the best deterrence properties for the coalition $\C$. In the next section we attempt to analyze this question. Our method of choice does not utilize the full strategic information available, but is based purely on the probabilities of ``true'' and ``false'' retaliations. This is to isolate the effect of the institutional design on these probabilities as a first step towards a broader understanding of the full dynamics.  
 
 
 

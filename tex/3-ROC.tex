@@ -1,6 +1,6 @@
 
-\section{Optimal thresholds}
-For a given coalition $\C$, there are countless possible choices for an institutional design $f$ that computes the aggregated decision based on coalition members' votes. As mentioned earlier, this function $f$ allways introduces a tradeoff between credible deterrence and excalation controll. 
+\section{Good schemes and thresholds}
+For a given coalition $\C$, there are countless possible choices for an institutional design $f$ that computes the aggregated decision based on coalition members' votes. As mentioned earlier, this function $f$ always introduces a tradeoff between credible deterrence and escalation control. 
 
 For $\C$ then, it is highly important to understand which such designs that give the best deterrence credibility while minimizing the risk of accidental retaliation. In essence, this is the classical tradeoff between the probability of \emph{true positives} and the probability of \emph{false positives}. There is a rich history from many fields of science studying this exact tradeoff, see for example \citeme and \citeme, that we can use to study this issue in our setting.
 
@@ -20,70 +20,99 @@ The standard way of measuring the accuracy of a binary classifier is to measure 
 This gives us the \emph{true positive rate} (TPR), defined as 
 \[\mathrm{TPR} = \frac{\text{true positive}}{\text{true positive} + \text{false negative}}\]
 and the \emph{false positive rate} (FPR), defined as 
-\[\mathrm{FPR} = \frac{\text{false negative}}{\text{true positive} + \text{false negative}}.\]
+\[\mathrm{FPR} = \frac{\text{false positive}}{\text{false positive} + \text{true negative}}.\]
 These are, respectively, the probability that retaliation occurs, and the probability of an accidental retaliation, which we have previously named $R(\tau)$ and $F(\tau)$. 
 
 The binary classifier is dependent on the threshold $\tau$, which allows us to visualize the classifiers performance on the true positive-false positive tradeoff by ROC curves. 
 
 \subsection{ROC curves}
-Reciever Operating Characteristic (ROC) curves were first used for radar signals during World War II, where they were used as an analysis tool for strengthening the predicting power of radars after the Pearl Harbor attack \citeme. Since then they have dound a wide use throughout science, mainly in medicine \citeme, epidemiology \citeme, and more recently as a tool for evaluating classification algorithms in machine learning \citeme and artificial intelligence \citeme. 
+Receiver Operating Characteristic (ROC) curves were first used for radar signals during World War II, where they were used as an analysis tool for strengthening the predicting power of radars after the Pearl Harbor attack \citeme. Since then they have found a wide use throughout science, mainly in medicine \citeme, epidemiology \citeme, and more recently as a tool for evaluating classification algorithms in machine learning \citeme and artificial intelligence \citeme. 
 
 The ROC space is defined by having TPR and FPR as its axes, and as these are rates from $0$ to $1$ the space is equivalent to the unit square. Any point in this space represents a tradeoff between true positives and false positives. The point $(0,1)$ is the \emph{perfect classifier}, in the sense that it correctly identifies $100\%$, with $0\%$ errors. The diagonal line $(x,x)$ represents a random classifier. Hence, points above the diagonal are better than random guessing, and points below are worse. 
 
 By plotting $(F(\tau), R(\tau))$ for all different thresholds $\tau$, one gets a curve through ROC space that visualizes the effect of the threshold on the true positive-false positive tradeoff. The point on this curve that is closest to the perfect classifier $(0,1)$ is the optimal threshold for the given choice function. 
 
-By making ROC curves for a variety of choice functions, we can then identify the \emph{best} institutional design for the coalition $\C$, in terms of maximizing correct retaliations while minimizing accidental use. One method for doing this is comparing ROC rurves on their area under the curve (AUC) -- a better institutional design will have a larger AUC. 
+By making ROC curves for a variety of choice functions, we can then identify institutional designs for the coalition $\C$ that performs well in a variety of settings. One method for doing this is comparing ROC curves on their area under the curve (AUC) -- a better institutional design will have a larger AUC. The AUC measures the probability that the given voting scheme ranks a true positive above a false positive, or in our case that it is able to clearly separate attacks from a known actor from ``false alarms''. Hence, a large AUC -- one that is close to $1$ -- will be more likely to produce large weighted sums when there is an actual attack, and low weighted sums when there is not. 
 
-We do this in two different situations: a large coalition and a small coalition. For the small coalition the small number of members allow us to compute the ROC curves empirically for a variety of choice functions $f$. For large coalitions, however, we use a normal approximation to the probabilities, and plot binormal ROC curves, as in \citeme, instead. 
+After finding voting schemes that perform well across all thresholds, we study which threshold that gives the best tradeoff between credible deterrence and escalation control. We do this by comparing all thresholds on Youden's J statistic $J(\tau) = R(\tau)-F(\tau)$ that is widely used in medical analysis, see \citeme and \citeme. The threshold with the largest $J$-number has maximal distance from the diagonal in the ROC space, and is interpreted as having the overall best detection quality \citeme. 
 
+We do this in detail for an example of a small coalition. The small number of members allows us to compute the ROC curves empirically for a variety of choice functions $f$. One can also easily do this for large coalitions by using normal approximation to the probabilities, and use binormal ROC curves \citeme. We have, in light of future work, chosen to focus on a small coalition resembling the Nordic countries, although we will keep all detail hypothetical for this paper. 
 
-\subsection{Small coalitions}
-Our small coalition $\C$ will consit of four members. We will not go into specifics or create a realistic coalition here, as this paper only serves to demonstrate the effect of the institutional design on the deterrence mechanism, and not imply policy. This also allow us to test hypothetical alterations of the choice functions due to different contexts the coalition exists in; specifically we consider choice function weight vectors $w$ based on hypothetical geographical, technological and geopolitical contexts. 
+\subsection{The needed computations}
+The votes $v_i \in \{0,1\}$ are assumed to be independent, with probabilities $p_i$ and $q_i$ for the two types $T=\{0,1\}$. Hence, the probability of a given vote-vector $v$ is a product of independent Bernoulli variables, 
+\[\Pr(v \mid T=1) = \prod_{i=1}^n p_i^{v_i}(1-p_i)^{1-v_i},\]
+for the aggressive type $T=1$, and similarly 
+\[\Pr(v \mid T=0) = \prod_{i=1}^n q_i^{v_i}(1-q_i)^{1-v_i}\]
+for the benign type $T=0$. 
 
-The ROC curves are dependent on the probabilities of correct indentification and the coalition members belief about the type $T$ of the adversary state $\A$. In order to compare choice functions based on their performance, we plot choice functions based on several natural weight schemes $w = [w_1, w_2, w_3, w_4]$ at the same time -- for fixed probability vectors $p = [p_1, p_2, p_3, p_4]$ and $q = [q_1, q_2, q_3, q_4]$. 
+Given a weight vector $w=(w_1, \dots, w_n)$, we have for each vote-vector $v$ a weighted sum $S=\sum_i^n w_i v_i$. There are $2^n$ possible vote-vectors, hence the distribution of this sum can be computed by aggregating all of the probabilities for all vote-vectors, with probabilities as above, producing two functions
+\[\Pr(S = s \mid T=1),\quad \Pr(S = s \mid T=0).\]
+Computing these probabilities allows us to also compute the points $(F(\tau), R(\tau))$ for all values of $\tau$. 
 
-We have chosen five different weight schemes for our coalition $\C = \{1,2,3,4\}$, which we will use for all of the probability variations. We have normalized them so that they all have the same total sum of $4$, as well as put the weights in decreasing order for simplicity. 
+The computations in this paper were done with a simple python script, which can be downloaded from the authors GitHub page \citeme. 
+
+\subsection{The example}
+Our small coalition $\C$ consist of four members. We will not go into specifics or create a realistic coalition here, as this paper only serves to demonstrate the effect of the institutional design on the deterrence mechanism, and not imply policy. This also allow us to test hypothetical alterations of the choice functions due to different contexts the coalition exists in; specifically we consider choice function weight vectors $w$ based on hypothetical geographical, technological and geopolitical contexts. 
+
+In order to compare choice functions based on their performance, we plot ROC-curves for several natural weight schemes at the same time. We have chosen five different weight schemes for our coalition, which we will use for all of the probability variations. We have normalized them so that they all have the same total sum of $4$, as well as put the weights in decreasing order for simplicity. 
 \begin{enumerate}
-    \item $w = (1,1,1,1)$ -- the \emph{unbiased} scheme. This treats all coalition members equally. Varying the threshold $\tau$ then gives the standard voting schemes described in \cref{ssec:threshold-rules}. 
+    \item $w = (1,1,1,1)$ -- the \emph{unbiased} scheme. This treats all coalition members equally. Varying the threshold $\tau$ then gives the standard voting schemes described in \cref{sec:social-choice-functions}. 
     \item $w = (4,0,0,0)$ -- the \emph{dictator} scheme. This is essentially the shared capability structure employed by NATO today, where the country owning the deterrence technology also has full control over its use.  
     \item $w = (2.5, 0.5, 0.5, 0.5)$ -- the \emph{veto} scheme. The scheme allows a single member to have full veto rights for most thresholds. 
-    \item $w = (1.16, 1.06, 0.89, 0.89)$ -- the \emph{technology} scheme. This weighs members according to bias coming from assymetric qualities, like techonology, competencies, or ISR capabilities. 
+    \item $w = (1.16, 1.06, 0.89, 0.89)$ -- the \emph{technology} scheme. This weighs members according to bias coming from asymmetric qualities, like techonology, competencies, or ISR capabilities. 
     \item $w = (1.6, 0.8, 0.8, 0.8)$ -- the \emph{frontline} scheme. This scheme weighs, for example, a coalition member that is a border-state with the adversary higher than the other members. 
-    \item $w = (1.6, 1.2, 0.8, 9.4)$ -- the \emph{geographical} scheme. The scheme weighs members according to their distance from the agressor, and hence by the probability of being affected. 
+    \item $w = (1.6, 1.2, 0.8, 0.4)$ -- the \emph{geographical} scheme. The scheme weighs members according to their distance from the aggressor, and hence by the probability of being affected. 
     \item $w = (1.33, 1.33, 0.67, 0.67)$ -- the \emph{two-bloc} scheme. This represents a coalition where there are two main members forming a block, and two secondary members forming a second block. 
 \end{enumerate}
 
-To have a base line, we look at the case where all coalition members have the same probability of voting in favor of retaliation given the type of $\A$. The following shows the ROC curves for the above weight schemes when both the shared resolve and the accuracy for correct identification are \emph{high} -- represented by $p = [0.85, 0.85, 0.85, 0.85]$ and $q = [0.05, 0.05, 0.05, 0.05]$ -- and when the shared resolve and accuracy is \emph{low} -- represented by $p = [0.60, 0.60, 0.60, 0.60]$ and $q = [0.20, 0.20, 0.20, 0.20]$. 
+To have a base line, we look at the case where all coalition members have the same probability of voting in favor of retaliation given the type of $\A$. \cref{fig:high-high} shows the ROC curves for the above weight schemes when both the shared resolve and the accuracy for correct identification are \emph{high} -- represented by $p = [0.85, 0.85, 0.85, 0.85]$ and $q = [0.05, 0.05, 0.05, 0.05]$. 
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=\columnwidth]{images/ROC_HighSymmetric.png.png}
+    \includegraphics[width=\columnwidth]{images/ROC_HighSymmetric.png}
+    \caption{ROC curves for high accuracy and resolve.}
     \label{fig:high-high}
 \end{figure}
 
+As is perhaps not too surprising, all choice functions perform fairly well when the probabilities are very simple to distinguish. All AUCs are close to $1$, meaning that the probability of ranking an attack above a false alarm is almost guaranteed for all of the schemes. The unbiased scheme, the technology scheme and the two-bloc scheme performs the best, with an AUC of $0.998$, while the dictator scheme performs the worst, with an AUC of $0.879$, which is still not too bad. 
+
+Similarly, we consider in \cref{fig:low-low} the case when the shared resolve and accuracy is \emph{low} -- represented by $p = [0.60, 0.60, 0.60, 0.60]$ and $q = [0.20, 0.20, 0.20, 0.20]$.
+
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=\columnwidth]{images/ROC_LowSymmetric.png.png}
+    \includegraphics[width=\columnwidth]{images/ROC_LowSymmetric.png}
+    \caption{ROC curves for low accuracy and resolve.}
     \label{fig:low-low}
 \end{figure}
 
-To differentiate a bit more, we consider the following increasin and probability-vectors, $p = [0.85, 0.70, 0.55, 0.40]$ and $q = [0.05, 0.10, 0.20, 0.30]$, as well as the misaligned vectors $p = [0.55, 0.65, 0.75, 0.85]$ and $q = [0.35, 0.25, 0.15, 0.05]$. 
+As each probability is still equal for all members, the shape of the ROC curves are identical to the ones above, only pushed in closer to the diagonal. Most of the voting schemes still perform fairly well given the circumstances. 
+
+To differentiate a bit more, we consider the following decreasing probability-vector $p = [0.85, 0.70, 0.55, 0.40]$, with the corresponding increasing vector $q = [0.05, 0.10, 0.20, 0.30]$. These probabilities align with the ranking of the members in all the weight schemes that are not the unbiased one, meaning that they ``match'' the hypothetical scenario. We then get the ROC curves in \cref{fig:strong-decreasing}. 
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=\columnwidth]{images/ROC_IncreasingStrong.png.png}
-    \label{fig:strong-increasing}
-\end{figure}
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=\columnwidth]{images/ROC_StrongDecreasing.png.png}
+    \includegraphics[width=\columnwidth]{images/ROC_StrongDecreasing.png}
+    \caption{ROC curves for a decreasing probability vector.}
     \label{fig:strong-decreasing}
 \end{figure}
 
-As one can see, some of the weight schemes are performing consistently better than others. To veryfy this we evaluate the weight schemes on a large variety of probability vectors, listed below, and study the statistics of their AUCs. We use 
+Here we see that the voting schemes have different performances, and that the unbiased scheme is no longer the top performer. The best performing scheme is the one that best utilizes the distribution of the probabilities -- the geographical scheme. The dictator scheme still performs the worst. 
+
+We also consider the case when the probabilities are not oriented in the same direction as the weights, using the ``misaligned'' vectors $p = [0.50, 0.60, 0.75, 0.90]$ and $q = [0.40, 0.30, 0.15, 0.05]$, see \cref{fig:strong-increasing}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\columnwidth]{images/ROC_IncreasingStrong.png}
+    \caption{ROC curves for an increasing probability vector.}
+    \label{fig:strong-increasing}
+\end{figure}
+
+This weight-probability combination exaggerates differences in voting schemes, which is also noticeable in the shape of the ROC curves -- they are considerably more varied. The best performer is again the unbiased scheme. The worst performer is still the dictator scheme, which here has an AUC of under $0.5$, meaning it is essentially worse than random guessing when trying to distinguish attacks from false alarms. 
+
+\subsection{Scheme performance}
+As one can see, some of the weight schemes are performing consistently better than others. To further study this we evaluate the weight schemes on a large variety of probability vectors, listed below, and study the statistics of their AUCs. These form varying \emph{information environments} that the coalition operates in. We use the probabilities as listed in \cref{table:p-q-vectors}. 
+
 \begin{table}[h!]
-\label{table:p-q-vectors}
 \centering
 \begin{tabular}{c c}
 \hline
@@ -106,15 +135,16 @@ $(0.88, 0.55, 0.70, 0.83)$ & $(0.06, 0.28, 0.18, 0.10)$ \\
 \hline
 \end{tabular}
 \caption{Varied range of vectors used in the analysis.}
+\label{table:p-q-vectors}
 \end{table}
 
-Computing AUC values for all of these, we obtain the following statistics for each weight scheme. 
+Computing AUC values for all of these, we obtain the statistics for each weight scheme as in \cref{table:AUC-statistics}. 
 
 \begin{table}[h!]
 \centering
 \begin{tabular}{lccc}
 \hline
-\textbf{Weight scheme} & \textbf{Mean} & \textbf{Min} & \textbf{Max} \\
+\textbf{Scheme} & \textbf{Mean} & \textbf{Min} & \textbf{Max} \\
 \hline
 Unbiased     & 0.932 & 0.606 & 0.998 \\
 Dictator     & 0.719 & 0.426 & 0.903 \\
@@ -126,31 +156,116 @@ Two-bloc     & 0.929 & 0.606 & 0.998 \\
 \hline
 \end{tabular}
 \caption{Mean, minimum and maximum AUC values for each weight scheme, computed from the probability-vectors listed in \cref{table:p-q-vectors}.}
+\label{table:AUC-statistics}
 \end{table}
 
-The best performer is the unbiased weight scheme, followed closely by the technology scheme and the two-bloc scheme. The dictator scheme performs considerably worse than the others. The following show the top two performers, and the worst performer, mapped against all the probability vectors in \cref{table:p-q-vectors}. 
+The best performer is the unbiased weight scheme. It has the highest mean AUC, as well as the highest minimum AUC, anf the highest maximum AUC. It is, however, followed closely by the technology scheme and the two-bloc scheme, which shares its minimum and maximum. The dictator scheme performs considerably worse than the others, with the lowest mean, the lowest minimum and the lowest maximum AUC. 
+
+To visualize the performance of the top performer, we map all of its ROC curves against all the probability vectors in \cref{table:p-q-vectors} in \cref{fig:unbiased}. 
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=\columnwidth]{images/unbiased_no-label.png}
+    \caption{ROC curves for the unbiased scheme on a variety of information environments.}
     \label{fig:unbiased}
 \end{figure}
 
+We see that its shape is consistent, and that its performance is good for most of the probability vectors. The curve close to the diagonal is associated to the vectors $p = [0.55, 0.55, 0.55, 0.55]$ and $q= [0.45, 0.45, 0.45, 0.45]$, which is close to being a random guess for the type of the adversary $\A$. 
+
+Similarly, for the technology scheme we get the collection of ROC curves presented in \cref{fig:technology}. 
+
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=\columnwidth]{images/unbiased_no-label.png}
+    \includegraphics[width=\columnwidth]{images/technology_no-label.png}
+    \caption{ROC curves for the technology scheme on a variety of information environments.}
     \label{fig:technology}
 \end{figure}
+
+Its performance is statistically similar to the unbiased scheme, but we see that it is much more sensitive to threshold variations, and that the resulting ROC curves are then more varied in shape. These alternative shapes come from probability vectors that are misaligned with the weight gradient -- which is purposefully not representing the schemes power in utilizing individual differences. This would be like a member getting higher voting power for having better ISR technology, but then being consistently unable to utilize this technology to its full potential, while other members with worse technology manage it better. 
+
+Finally, \cref{fig:dictator} shows the same data for the worst performer -- the dictator scheme. 
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=\columnwidth]{images/dictator_no-label.png}
+    \caption{ROC curves for the dictator scheme on a variety of information environments.}
     \label{fig:dictator}
 \end{figure}
 
+Its ROC curves are all shaped like lines, as it is only possible for the scheme to output a $1$ when the threshold is lower than the voting power of the dictator -- all other thresholds give the same point $(1,1)$. Note that the dictator scheme can perform well compared to the other schemes, in situations where the dictator member is vastly superior in information.
 
+\subsection{Threshold performance}
+The previous section argued that the voting scheme that performs , when ranked on their performance across \emph{all} thresholds, is the unbiased scheme. This is, however, perhaps not the optimal metric for finding the \emph{best} voting scheme for a small coalition. We then need to find the weight-threshold combination that gives the best performing single point -- not the entire curve. 
 
+To do this we compute Youden's $J$-statistic for all schemes on all of the probabilities in \cref{table:p-q-vectors}, and study the statistics of the schemes performances. Youden's $J$-statistic is, as previously mentioned, defined by $J(\tau) = R(\tau) - F(\tau)$. 
 
+Just as for the AUC values, we list in \cref{table:J-statistics} the mean, minimum and maximum $J$-numbers for all of the voting schemes, computed for all of the probability vectors in \cref{table:p-q-vectors}. We also list the mean optimal threshold $\tau^*$, computed for the same data. The $\tau^*$ value below should really be discretized by rounding up to the nearest whole integer, but we have decided to keep them as is for comparison and insight.  
 
+\begin{table}[h!]
+\centering
+\begin{tabular}{lcccc}
+\hline
+\textbf{Scheme} 
+& \textbf{Mean} 
+& \textbf{Min} 
+& \textbf{Max} 
+& \textbf{Mean $\tau^*$} \\
+\hline
+Unbiased      
+& 0.807 
+& 0.150 
+& 0.974 
+& 1.17 \\
 
-\subsection{Large coalitions}
+Dictator      
+& 0.566 
+& 0.100 
+& 0.850 
+& 0.10 \\
+
+Veto          
+& 0.705 
+& 0.125 
+& 0.934 
+& 0.84 \\
+
+Technology    
+& 0.802 
+& 0.150 
+& 0.974 
+& 1.44 \\
+
+Frontline     
+& 0.757 
+& 0.149 
+& 0.934 
+& 1.19 \\
+
+Geographical  
+& 0.760 
+& 0.149 
+& 0.946 
+& 1.48 \\
+
+Two-bloc      
+& 0.807 
+& 0.150 
+& 0.974 
+& 1.47 \\
+\hline
+\end{tabular}
+\caption{The mean, minimum and maximum Youden's $J$ statistic, and mean optimal threshold $\tau^*$ for all voting schemes, computed across all probability vectors.}
+\label{table:J-statistics}
+\end{table}
+
+Here we see that the unbiased scheme and the two-bloc scheme performs the best overall, followed closely again by the technology scheme. The two-bloc scheme has a higher mean optimal threshold $\tau^*$ compared to the unbiased scheme, but in effect, due to the discrete small coalition, the best threshold is $\tau^* = 2$ for both. 
+
+As the unbiased scheme does not make any assumptions on the coalitions internal structure -- the partitioning into blocs -- as well as having better AUC statistics, we conclude that the better institutional design for the four-member deterrence coalition $\C$ is the \emph{majority rule}. 
+
+Intuitively, the majority rule benefits from its essential feature: symmetry. When a member's individual errors are independent and not systematically biased, the unbiased scheme's equal weighting minimizes sensitivity to these miscalibrations, making it perform best on average.
+
+\begin{remark}
+    If the coalition  is highly certain and confident of their members technological capabilities and its accuracy in a plethora of real-world scenarios, then the technology scheme might outperform it -- still with optimal threshold $\tau^* = 2$. However, given any possibility for a scenario where the probabilities are misaligned with the weights, the unbiased scheme will outperform the technology scheme on average. 
+\end{remark}
+
+ 
