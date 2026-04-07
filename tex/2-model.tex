@@ -4,36 +4,31 @@
 Our model exists as a combination of two much studied mathematical models: signalling games and social choice functions. These are each ubiquitous in their own respective fields of deterrence theory and voting theory. Before putting forth our combined model, we briefly explain the pieces saparately.
 
 \subsection{Signalling games}
-Signalling games are dynamic Bayesian games, first studied in relation to learning by Lewis \citeme. For a more modern treatment see \citeme, and for deterrence specific signalling theory see \citeme. 
+Signalling games are dynamic Bayesian games, first studied in relation to learning by Lewis \cite{Lewis_1969}. For a more modern treatment see \cite{Fudenberg-Tirole_1991}, and for deterrence specific signalling games see \cite{Schelling_1960}. 
 
-In a signalling game the players have incomplete information about the initial situation, and the game unfolds sequentially over time, with actions known to the other players \citeme. More precisely, one player -- often called the sender -- has some private information about the state of the world, and takes an observable action $S$, called the signal, after which another player -- often called the receiver -- updates their beliefs about the world and chooses an action. The private information of each player is called the \emph{type}. 
+In a signalling game the players have incomplete information about the initial situation, and the game unfolds sequentially over time, with actions known to the other players \cite{Fudenberg-Tirole_1991}. More precisely, one player -- often called the sender -- has some private information about the state of the world, and takes an observable action $S$, called the signal, after which another player -- often called the receiver -- updates their beliefs about the world and chooses an action. The private information of each player is called the \emph{type}. 
 
 In our case of deterrence, incomplete information is essential; the uncertainties around the opponents resolve lies at the heart of the mechanism making deterrence a viable strategy. 
 
-In non-cooperative game theory, Nash equilibria are the standard solution concept for determining optimal strategies. In signalling games, however, one usually needs more refined concept, due to the players not knowing the beliefs of the other players correctly. These are called \emph{perfect Bayesian equilibria}, see \citeme. 
+In non-cooperative game theory, Nash equilibria are the standard solution concept for determining optimal strategies. In signalling games, however, one usually needs more refined concept, due to the players not knowing the beliefs of the other players correctly. These are called \emph{perfect Bayesian equilibria}, see \cite{Cho-Kreps_1987}. 
 
-We will, however, not solve for this solution concept in this paper, as our game will be of a deliberately simple nature where this full generality is unnecessary. Instead we will use \emph{attack conditions}, which are assignments of simple actions to the type of the players. These are based on incomplete-information thresholds in crisis bargaining, see for example \citeme, and is a standard simple way of studying simple strategic actions. 
-%Fearon 1995
-
-%The standard solution concept for signalling games are \emph{perfect Bayesian equilibria} (PBE), which are also always Nash equilibria \citeme. A PBE consists of \emph{strategies} and \emph{beliefs}. These have to follow the rules of \emph{sequential rationality}, where each strategy is optimal according to the associated belief, and \emph{consistency}, where beliefs are updated by the strategies according to Bayes rule. 
-
-%In essence, a PBE is an assignment to a set of actions and beliefs to each possible type. If all types are assigned the same set of actions and beliefs, it is called \emph{pooling}, and if it sends each type to different actions and beliefs, then it is called \emph{separating}. 
+We will, however, not solve for this solution concept in this paper, as our game will be of a deliberately simple nature where this full generality is unnecessary. Instead we will use \emph{attack conditions}, which are assignments of simple actions to the type of the players. These are based on incomplete-information thresholds in crisis bargaining, see for example \cite{Fearon_1995}, and is a standard simple way of studying simple strategic actions. 
 
 \subsection{Social choice functions}
 \label{sec:social-choice-functions}
 
-Social choice functions are mathematical models for ranking a set of alternatives, often called \emph{social states}, by their collective desirability -- combining the independent preferences of the individual into a common ``will'' of the people. Early versions were studied by Condorcet and Llull, \citeme and \citeme, but the modern theory now in use is often attributed to Arrow's work \citeme -- see \citeme for an introduction. 
+Social choice functions are mathematical models for ranking a set of alternatives, often called \emph{social states}, by their collective desirability -- combining the independent preferences of the individual into a common ``will'' of the people. Early versions were studied by Condorcet and Llull, see \cite{Condorcet_1785} and \cite{Colomer_2013}, but the modern theory now in use is often attributed to Arrow's work \cite{Arrow_1951} -- see \cite{Moulin_1988} for an introduction. 
 
-Social choice functions can be either \emph{cardinal} or \emph{ordinal}, \citeme. Ordinal functions only use the relative ordering of social states to compute the best preferred state according to some mathamatical rule. On the other hand, cardinal functions use specific values attached to each social state, and hence is able to compute not just which state is preferred, but how much it is preferred to the other states. It is the former, the ordinal choice functions, that are most often used in public voting and electoral systems, and also the type of function we will use in this paper. Our needs are also very simple, as our list of potential outcomes will be binary, hence we focus only on these in the following examples. 
+Social choice functions can be either \emph{cardinal} or \emph{ordinal}, \cite{Sen_1977}. Ordinal functions only use the relative ordering of social states to compute the best preferred state according to some mathamatical rule. On the other hand, cardinal functions use specific values attached to each social state, and hence is able to compute not just which state is preferred, but how much it is preferred to the other states. It is the former, the ordinal choice functions, that are most often used in public voting and electoral systems, and also the type of function we will use in this paper. Our needs are also very simple, as our list of potential outcomes will be binary, hence we focus only on these in the following examples. 
 
-The most frequently used voting rule is the \emph{majority rule}, stating the preferred choice between two options is the one chosen by more than half of the voters \citeme. In mathematical terms, 
+The most frequently used voting rule is the \emph{majority rule}, stating the preferred choice between two options is the one chosen by more than half of the voters \cite{May_1952}. In mathematical terms, 
 \[f(v;w) = 
 \begin{cases}
     1, &\displaystyle \sum_{i=1}^{n} v_i > \frac{n}{2}  \\
     0, & \text{else}.
 \end{cases}
 \]
-By varying the threshold for the rule outputing a $1$, we also vary the choice function. For example, the consensus rule, used for example when NATO votes on shared policies and solutions \citeme, states that the preferred choice between two options is the one chosen by \emph{all} voters:
+By varying the threshold for the rule outputing a $1$, we also vary the choice function. For example, the consensus rule, used for example when NATO votes on shared policies and solutions \cite{NATOConsensus}, states that the preferred choice between two options is the one chosen by \emph{all} voters:
 \[f(v;w) = 
 \begin{cases}
     1, &\displaystyle \sum_{i=1}^{n} v_i = n  \\
@@ -92,8 +87,7 @@ This function captures the \emph{deterrence credibility} of the coalition $\C$. 
 
 Similarly, if the adversary does \emph{not} attack, then retaliation is accidental, with probability 
 \[F(\tau) = \Pr\left(\sum_{i=1}^n w_i v_i \geq \tau \mid T=0\right)\]
-This function captures the coalition's \emph{escalation risk}, i.e., the probability that the coalition accidentally authorizes a response. This could happen if, for example, another actor than $\A$ was responsible for an attack on the coalition, or that an accident is interpreted as an attack, as explored in multiple wargames, see for example \citeme. 
-% BBC wargame ?     
+This function captures the coalition's \emph{escalation risk}, i.e., the probability that the coalition accidentally authorizes a response. This could happen if, for example, another actor than $\A$ was responsible for an attack on the coalition, or that an accident is interpreted as an attack, as explored in multiple wargames and academic studies, see for example \cite{Sagan_1993} and \cite{Blair_1993}.
 
 \begin{example}
     \label{ex:binomial}
@@ -145,7 +139,7 @@ These fractions give the adversary actor $\A$'s \emph{deterrence thresholds} and
 \end{remark}
 
 \begin{remark}
-    The costs $C_1$ and $C_0$ depends on the coalition $\C$'s available deterrence technology. For example, having strategic nuclear weapons significantly increases the costs of retaliation for the adversary $\A$. As discussed in the introduction, new nuclear alliances are prohibited by the Non-Proliferation Treaty \citeme. But, in certain situations and contexts, it is possible to circumvent this, or alternatively use other available or future technologies. We can then study two different costs -- one with and one without sufficient deterrence technologies -- and see how this affects the equilibria. Doing this reveals the natural outcome: larger costs means smaller expected payoffs, and larger intervals where deterrence is successful. 
+    The costs $C_1$ and $C_0$ depends on the coalition $\C$'s available deterrence technology. For example, having strategic nuclear weapons significantly increases the costs of retaliation for the adversary $\A$. As discussed in the introduction, new nuclear alliances are prohibited by the Non-Proliferation Treaty \cite{NPT_1968}. But, in certain situations and contexts, it is possible to circumvent this, or alternatively use other available or future technologies. We can then study two different costs -- one with and one without sufficient deterrence technologies -- and see how this affects the equilibria. Doing this reveals the natural outcome: larger costs means smaller expected payoffs, and larger intervals where deterrence is successful. 
 \end{remark}
 
 As the game is very simple, it is not only the attack conditions that are interesting. The interesting question about our setup is, in our opinion, trying to determine which social choice functions that yield the best deterrence properties for the coalition $\C$. In the next section we attempt to analyze this question. Our method of choice does not utilize the full strategic information available, but is based purely on the probabilities of ``true'' and ``false'' retaliations. This is to isolate the effect of the institutional design on these probabilities as a first step towards a broader understanding of the full dynamics.  
