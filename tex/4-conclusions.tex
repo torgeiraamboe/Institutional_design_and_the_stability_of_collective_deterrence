@@ -2,9 +2,9 @@
 
 
 \section{Conclusion}
-Now that we have landed on a well-performing social choice function for our coalition $\C$, we can also understand the associated deterrence behavior for the signaling game in \cref{sec:the-model}. 
+Now that we have landed on a well-performing social choice function for our coalition $\C$, we can also understand the associated deterrence behavior for the signaling game-inspired model in \cref{sec:the-model}. 
 
-If we omit the unlikely scenario that the probability vectors are almost random, $p=[0.55,0.55,0.55,0.55]$ and $q=[0.45, 0.45, 0.45,0.45]$, we obtain an average retaliation probability 
+If we omit the unlikely ``outlier'' scenario that the probability vectors are almost random, $p=[0.55,0.55,0.55,0.55]$ and $q=[0.45, 0.45, 0.45,0.45]$, we obtain an average retaliation probability 
 \begin{align*}
     \overline{R(\tau^*)}
     &= \frac{1}{13}\sum_{k=1}^{13}\Pr\left(\sum_{i=1}^4 v_i \geq 2 \mid T=1, p = p_k, q=q_k\right) \\
@@ -16,7 +16,7 @@ where $p$ and $q$ ranges over the remaining $13$ probability vectors in \cref{ta
     &= \frac{1}{13}\sum_{k=1}^{13}\Pr\left(\sum_{i=1}^4 v_i \geq 2 \mid T=0, p = p_k, q=q_k\right) \\
     &\approx 0.12.
 \end{align*}
-On average, across a plethora of scenarios, the adversary state $\A$ attacks when the perceived benefit and costs satisfy 
-\[0.92 \leq \frac{B_1}{B_1+C_1},\]
-which happens if the costs are small compared to the benefits. Hence, for four-member coalitions with sufficient deterrence technologies, like strategic nuclear warheads, deterrence will be quite credible in most situations when using the majority rule as their institutional design.
+On average, across a plethora of scenarios, the adversary state $\A$ attacks when the perceived benefit and costs satisfy $0.92 \leq \frac{B}{B+C}$, which happens if the benefit is about $11.5$ times greater than the costs. Hence, for four-member coalitions with sufficient deterrence technologies, like strategic nuclear warheads, deterrence will be quite credible in most situations when using the majority rule as their institutional design.
+
+In summary, we have presented a simple model for understanding an adversary's attack conditions, dependent on how a deterrence coalition aggregates its members votes toward a shared decision on retaliation. This, we argued, introduced a strategic tradeoff between true and false positives, or \emph{deterrence credibility} and \emph{escalation risk}. This tradeoff was used to further frame deterrence as a binary classification problem, which allowed us to use standards techniques from medical analysis and signal analysis to explore how different such institutional designs respond to different information environments, and how it affects the adversary's beliefs about retaliation. 
 

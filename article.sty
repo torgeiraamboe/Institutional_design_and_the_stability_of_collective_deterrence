@@ -23,6 +23,7 @@
 \RequirePackage{imakeidx}
 %\RequirePackage{mathtools} %For harpoons 
 \RequirePackage{mathrsfs}
+\RequirePackage{caption}
 \RequirePackage{titling}
 \RequirePackage{csquotes}
 \RequirePackage{%
@@ -49,24 +50,36 @@
 \RequirePackage{hyperref}
 \RequirePackage[capitalize, nameinlink]{cleveref}
 
+
+% SECTIONS
 \setcounter{secnumdepth}{3}
 \cftsetindents{section}{2em}{2em}
 \cftsetindents{subsection}{4em}{3em}
 \cftsetindents{subsubsection}{6em}{3em}
 
-%\setlength{\parindent}{3em}
-%\setlength{\parskip}{5pt}
+% FIGURES
+\setlength{\textfloatsep}{8pt}
+\setlength{\floatsep}{8pt}
+\setlength{\intextsep}{8pt}
+\captionsetup[figure]{skip=4pt}
 
 \graphicspath{{./images/}}
 \pgfplotsset{compat=1.15}
 
+% GEOMETRY AND SPACE
+%\setlength{\parindent}{3em}
+%\setlength{\parskip}{5pt}
+\geometry{
+    top=25mm, 
+    bottom=25mm, 
+    left=15mm, 
+    right=15mm
+}
+
+% COLORS
 \definecolor{mycite}{RGB}{100, 160, 20}
 \definecolor{mydef}{RGB}{67, 124, 23}
 \definecolor{mylink}{RGB}{21, 106, 30}
-
-\DeclareFieldFormat{postnote}{#1} %Removes p. in citations
-
-
 \hypersetup{
 colorlinks=true,
 citecolor=teal,
@@ -75,15 +88,13 @@ urlcolor=black
 }
 \newcommand{\defn}{\color{teal}}
 
+
+% BIBLIOGRAPHY
+\newcommand{\citeme}{{\color{red}{CITE}~}}
+\DeclareFieldFormat{postnote}{#1} %Removes p. in citations
 \newcommand*\backref[1]{\ifx#1\relax \else (Cited on #1) \fi}
 
 
-\geometry{
-    top=25mm, 
-    bottom=25mm, 
-    left=15mm, 
-    right=15mm
-}
 
 %% code from mathabx.sty and mathabx.dcl
 \DeclareFontFamily{U}{mathx}{\hyphenchar\font45}
@@ -99,12 +110,10 @@ urlcolor=black
 
 \def\cs#1{\texttt{\char`\\#1}}
 
-\newcommand{\citeme}{{\color{red}{CITE}~}}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
+% ENVIRONMENTS
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{introthm}{Theorem}
 \renewcommand*{\theintrothm}{\Alph{introthm}}
@@ -125,8 +134,7 @@ urlcolor=black
 \newtheorem{digression}[theorem]{Digression}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+% MACROS
 
 % Symbols
 \renewcommand*{\le}{\leqslant}
@@ -279,17 +287,20 @@ urlcolor=black
 \newcommand{\attack}{\mathrm{attack}}
 
 
+
+
+
+
+% PAGESTYLE
 %\pagestyle{fancy}
 %\fancyhf{}
 %\setlength{\headheight}{15pt}
-
 %\lhead{\leftmark}
 \cfoot{\thepage}
 
 
 
-%%% Tikz settings
-
+% TIKZ SETTINGS
 \tikzset{
 %->,  
 %>=stealth, 
