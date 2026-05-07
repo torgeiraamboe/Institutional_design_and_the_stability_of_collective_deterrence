@@ -10,7 +10,7 @@ In a signalling game, the players have incomplete information about the initial 
 
 In our case of deterrence, incomplete information is essential; the uncertainties around the opponents resolve lies at the heart of the mechanism making deterrence a viable strategy. 
 
-In non-cooperative game theory, Nash equilibria are the standard solution concept for determining optimal strategies. In signalling games, one usually needs more refined concept, due to the players not knowing the beliefs of the other players correctly. These are called \emph{perfect Bayesian equilibria}, see \cite{Fudenberg-Tirole_1991_paper}. We will, however, not solve for this solution concept in this paper, as our game will be of a deliberately simple nature where this full generality is unnecessary. 
+In non-cooperative game theory, Nash equilibria are the standard solution concept for determining optimal strategies. In signalling games, one usually needs more a refined concept, due to the players not knowing the beliefs of the other players correctly. These are called \emph{perfect Bayesian equilibria}, see \cite{Fudenberg-Tirole_1991_paper}. We will, however, not solve for this solution concept in this paper, as our game will be of a deliberately simple nature where this full generality is unnecessary. 
 
 Instead we will use \emph{attack conditions}, which are assignments of simple actions to the type of the players. These are motivated by threshold logic in crisis bargaining under incomplete information, see for example \cite{Fearon_1995}, and is a simpler way of studying basic strategic actions. 
 
@@ -35,13 +35,13 @@ By varying the threshold for the rule outputing a $1$, we also vary the choice f
     0, & \text{else}.
 \end{cases}
 \]
-This is essentially a voting scheme in which every voter has a veto right. Choosing other thresholds, like $\frac{2}{3}$ gives the \emph{qualified majority rule} and choosing $\frac{3}{4}$ gives the \emph{supermajority rule}. 
+This is essentially a voting scheme in which every voter has a veto right. Choosing other thresholds, like $\frac{2}{3}$ or $\frac{3}{4}$ gives the \emph{qualified majority rule} and the \emph{supermajority rule} respectively. 
 
 There are also many other voting schemes, like the \emph{dictatorial} scheme, where only one voter has a say and always completely determines the outcome. The restricted class of social choice functions used in the model is described in \cref{ssec:weighted-threshold-functions}. 
 
 \section{The model}
 \label{sec:the-model}
-Our model adopts this basic structure of a signalling game, as presented above, where we assume one of the players to be a coalition consisting of multiple states $\C = \{1, 2, \dots, n\}$. The other player is some potential attacking adversarial actor $\A$. Before we explain the individual parts, we summary the sequence of events: 
+Our model adopts this basic structure of a signalling game, as presented above, where we assume one of the players to be a coalition consisting of multiple states $\C = \{1, 2, \dots, n\}$. The other player is some potential attacking adversarial actor $\A$. Before we explain the individual parts, we summarize the sequence of events: 
 \begin{enumerate}
     \item the coalition has a predetermined fixed social choice function $f$, which is publicly known;
     \item nature draws aversary type $T$;
@@ -65,6 +65,10 @@ of a retaliatory strike based on erroneous information. Note that an adversary $
 \end{remark} 
 
 In the case of an attack, each coalition member $i\in \C$ then decides on a binary vote $v_i \in \{0,1\}$, interpreted as their vote towards authorizing retaliation. In order to focus this paper on the institutional mechanisms, and not on whether the coalition members try to strategize for their own gain, we assume that $v_i = s_i$, which means that we assume the actors to vote truthfully based on their own intelligence assessments and internal stance. 
+
+\begin{remark}
+    We also remark that the voting system does not have to be a physical process, where leaders and decision-makers meet and vote on retaliation in a shared physical or digital space. For example, each coalition member's decision-maker can be given a big red button contained in a black suitcase, which registers their vote whenever they deem it necessary. 
+\end{remark}
 
 \subsection{Weighted threshold functions}
 \label{ssec:weighted-threshold-functions}
