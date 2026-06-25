@@ -2,11 +2,11 @@
 \section{Good schemes and thresholds}
 For a given coalition $\C$, there are countless possible choices for an institutional design $f$ that computes the aggregated decision based on coalition members' votes. As mentioned earlier, this function $f$ always introduces a tradeoff between credible deterrence and escalation risk. 
 
-For $\C$ then, it is highly important to understand which such designs that give the best deterrence credibility while minimizing the risk of accidental retaliation. In essence, this is the classical tradeoff between the probability of \emph{true positives} and the probability of \emph{false positives}. There is a rich history from many scientific diciplines studying this exact tradeoff, see for example \cite{Green-Swets_1966}, that we can use to study this issue in our setting.
+For $\C$ then, it is highly important to understand which such designs that give the best deterrence credibility while minimizing the risk of accidental retaliation. In essence, this is the classical tradeoff between the probability of \emph{true positives} and the probability of \emph{false positives}. There is a rich history from many scientific diciplines studying this exact tradeoff, see for example \parencite{Green-Swets_1966}, that we can use to study this issue in our setting.
 
-Our choice function $f$ has two possible outcomes, retaliation or no retaliation, based on two possible situations of true or false attacks. By false attack, or no attack, we here mean that there has been a false detection due to an accident, or an attack that is misattributed to the wrong adversary. This means that the function $f$ is a binary classifier -- see for example \cite{Hastie-Tibshirani-Friedman_2009}. 
+Our choice function $f$ has two possible outcomes, retaliation or no retaliation, based on two possible situations of true or false attacks. By false attack, or no attack, we here mean that there has been a false detection due to an accident, or an attack that is misattributed to the wrong adversary. This means that the function $f$ is a binary classifier -- see for example \parencite{Hastie-Tibshirani-Friedman_2009}. 
 
-The standard way of measuring the accuracy of a binary classifier is to measure the correct and incorrect assignments, \cite{Swets_1988}. For this we have a simple contingency matrix:
+The standard way of measuring the accuracy of a binary classifier is to measure the correct and incorrect assignments, \parencite{Swets_1988}. For this we have a simple contingency matrix:
 
 \begin{table}[h]
 \centering
@@ -26,17 +26,17 @@ These are, respectively, the probability that retaliation occurs, and the probab
 The binary classifier $f$ is dependent on the threshold $\tau$, which allows us to visualize and analyze the classifiers performance on the true positive-false positive tradeoff by ROC curves. 
 
 \subsection{ROC curves}
-Receiver Operating Characteristic (ROC) curves were first used after the second world war in order to strengthen the predicting power of radar signals, see \cite{Fawcett_2006} for an introduction. Since then they have found a wide use throughout science, mainly in medicine and epidemiology \cite{Hanley-McNeil_1982}, and more recently as a tool for evaluating classification algorithms in machine learning and artificial intelligence \cite{Bishop_2006, Bradley_1997}. 
+Receiver Operating Characteristic (ROC) curves were first used after the second world war in order to strengthen the predicting power of radar signals, see \parencite{Fawcett_2006} for an introduction. Since then they have found a wide use throughout science, mainly in medicine and epidemiology \parencite{Hanley-McNeil_1982}, and more recently as a tool for evaluating classification algorithms in machine learning and artificial intelligence \parencite{Bishop_2006, Bradley_1997}. 
 
 The ROC space is defined by having TPR and FPR as its axes, and as these are rates from $0$ to $1$ the space is equivalent to the unit square. Any point in this space represents a tradeoff between true positives and false positives. The point $(0,1)$ is the \emph{perfect classifier}, in the sense that it correctly identifies $100\%$, with $0\%$ errors. The diagonal line $(x,x)$ represents all random classifiers. Hence, points above the diagonal are better than random guessing, and points below are worse. 
 
 By plotting $(F(\tau), R(\tau))$ for all different thresholds $\tau$, one gets a curve through ROC space that visualizes the effect of the threshold on the true positive-false positive tradeoff. The point on this curve that is closest to the perfect classifier $(0,1)$ is the optimal threshold for the given choice function. 
 
-By making ROC curves for a variety of choice functions, we can then identify institutional designs for the coalition $\C$ that performs well in a variety of settings. One method for doing this is comparing ROC curves on their area under the curve (AUC) -- a better institutional design will have a larger AUC. The AUC measures the probability that the given voting scheme ranks a true positive above a false positive \cite{Hanley-McNeil_1982}, or in our case that it is able to clearly separate attacks from a known actor from ``false alarms''. Hence, a large AUC -- one that is close to $1$ -- will be more likely to produce large weighted sums when there is an actual attack, and low weighted sums when there is not. 
+By making ROC curves for a variety of choice functions, we can then identify institutional designs for the coalition $\C$ that performs well in a variety of settings. One method for doing this is comparing ROC curves on their area under the curve (AUC) -- a better institutional design will have a larger AUC. The AUC measures the probability that the given voting scheme ranks a true positive above a false positive \parencite{Hanley-McNeil_1982}, or in our case that it is able to clearly separate attacks from a known actor from ``false alarms''. Hence, a large AUC -- one that is close to $1$ -- will be more likely to produce large weighted sums when there is an actual attack, and low weighted sums when there is not. 
 
-After finding voting schemes that perform well across all thresholds, we study which threshold that gives the best tradeoff between credible deterrence and escalation risk. We do this by comparing all thresholds on Youden's $J$ statistic, introduced originally in \cite{Youden_1950}. It is defined by $J(\tau) = R(\tau)-F(\tau)$, and is widely used in modern analyses, see for example \cite{Fluss_2005}. The threshold with the largest $J$-number has maximal vertical distance from the diagonal in the ROC space, and is interpreted as having the overall best detection quality. 
+After finding voting schemes that perform well across all thresholds, we study which threshold that gives the best tradeoff between credible deterrence and escalation risk. We do this by comparing all thresholds on Youden's $J$ statistic, introduced originally in \parencite{Youden_1950}. It is defined by $J(\tau) = R(\tau)-F(\tau)$, and is widely used in modern analyses, see for example \parencite{Fluss_2005}. The threshold with the largest $J$-number has maximal vertical distance from the diagonal in the ROC space, and is interpreted as having the overall best detection quality. 
 
-We do this in detail for an example of a small coalition. The small number of members allows us to compute the ROC curves empirically for a variety of choice functions $f$. One can also easily do this for large coalitions by using normal approximation to the probabilities, and use binormal ROC curves \cite{Metz_1978}. We have chosen not to focus on large coalitions in this paper, as results such as Condorcet's Jury Theorem \cite{Condorcet_1785, List-Goodin_2001} make these binary classification problems fairly trivial. 
+We do this in detail for an example of a small coalition. The small number of members allows us to compute the ROC curves empirically for a variety of choice functions $f$. One can also easily do this for large coalitions by using normal approximation to the probabilities, and use binormal ROC curves \parencite{Metz_1978}. We have chosen not to focus on large coalitions in this paper, as results such as Condorcet's Jury Theorem \parencite{Condorcet_1785, List-Goodin_2001} make these binary classification problems fairly trivial. 
 
 \subsection{The needed computations}
 The votes $v_i \in \{0,1\}$ are assumed to be independent, with probabilities $p_i$ and $q_i$ for the two types $T=\{0,1\}$. Hence, the probability of a given vote-vector $v$ is a product of independent Bernoulli variables, 
@@ -47,7 +47,7 @@ for the benign type $T=0$.
 
 Given a weight scheme $w=[w_1, \dots, w_n]$, we have for each vote-vector $v$ a weighted sum $S=\sum_{i=1}^n w_i v_i$. There are $2^n$ possible vote-vectors, hence the distribution of this sum can be computed by aggregating all of the probabilities for all vote-vectors -- with probabilities as above -- producing two cases, $\Pr(S = s \mid T=1)$ and $\Pr(S = s \mid T=0).$ Computing these probabilities then, allows us to compute the points $(F(\tau), R(\tau))$ for all values of $\tau$ by computing the above probabilities for all values $s$. 
 
-The thresholds themselves are limited to existing in the interval $[0, \sum_{i=1}^n w_i]$, as these thresholds are the only ones making an effect on the choice function. The computations in this paper were done with a simple python script, which can be downloaded from the authors GitHub page \cite{GitHub}. The program samples $\tau$ linearly $40-50$ times, which is sufficient for our simple case. 
+The thresholds themselves are limited to existing in the interval $[0, \sum_{i=1}^n w_i]$, as these thresholds are the only ones making an effect on the choice function. The computations in this paper were done with a simple python script, which can be downloaded from the authors GitHub page \parencite{GitHub}. The program samples $\tau$ linearly $40-50$ times, which is sufficient for our simple case. 
 
 \subsection{The example}
 \label{ssec:the-example}
@@ -177,7 +177,7 @@ To visualize the performance of the unbiased scheme, we map all of its ROC curve
 We see that its shape is consistent, and that its performance is good for most of the probability vectors. The curve close to the diagonal is associated to the vectors $p = [0.55, 0.55, 0.55, 0.55]$ and $q= [0.45, 0.45, 0.45, 0.45]$, which is close to being a random guess for the type of the adversary $\A$. 
 
 \begin{remark}
-    Note that, if the probabilities satisfy $p_i>0.5$ and $q_i<0.5$ for all coalition members $i$, then Condorcet's Jury theorem (\cite{Condorcet_1785, List-Goodin_2001}) assures that the associated ROC-curve will approach the perfect classifier $(0,1)$ as the sixe of the coalition increases. 
+    Note that, if the probabilities satisfy $p_i>0.5$ and $q_i<0.5$ for all coalition members $i$, then Condorcet's Jury theorem \parencite{Condorcet_1785, List-Goodin_2001} assures that the associated ROC-curve will approach the perfect classifier $(0,1)$ as the sixe of the coalition increases. 
 \end{remark}
 
 We do the same computation for the technology scheme, which gives us the collection of ROC curves presented in \cref{fig:technology}. 
@@ -207,7 +207,7 @@ The previous section ranked each weight scheme on their performance across \emph
 
 To do this we compute Youden's $J$-statistic for all schemes on all of our earlier information environments, and study the statistics of the schemes performances. Youden's $J$-statistic is, as previously mentioned, defined by $J(\tau) = R(\tau) - F(\tau)$, and measures the greatest vertical distance from the random classifier diagonal line. The threshold that yields the greatest $J$-number is the \emph{optimal} threshold, and will be denoted by $\tau^*$. 
 
-Just as for the AUC values, we list in \cref{table:J-statistics} the mean, minimum and maximum $J$-numbers for all of the voting schemes, computed for all of the probability vectors in \cref{table:p-q-vectors}. We also list the mean optimal threshold $\tau^*$, computed for the same data. The $\tau^*$ value below should really be discretized by rounding up to the nearest whole integer, but we have decided to keep them as is for comparison and insight.  
+Just as for the AUC values, we list in \cref{table:J-statistics} the mean, minimum and maximum $J$-numbers for all of the voting schemes, computed for all of the probability vectors in \cref{table:p-q-vectors}. We also list the mean optimal threshold $\overline{\tau^*}$, computed for the same data. The $\tau^*$ value below should really be discretized by rounding up to the nearest whole integer, but we have decided to keep them as is for comparison and insight.  
 
 \begin{table}[h!]
 \centering
@@ -217,7 +217,7 @@ Just as for the AUC values, we list in \cref{table:J-statistics} the mean, minim
 & \textbf{Mean} 
 & \textbf{Min} 
 & \textbf{Max} 
-& \textbf{Mean $\tau^*$} \\
+& \textbf{$\overline{\tau^*}$} \\
 \hline
 Unbiased      
 & 0.807 

@@ -6,12 +6,18 @@
 \RequirePackage{geometry}
 \RequirePackage[%
 				backend=biber,%
-				url=false,%
+				url=true,%
 				isbn=true,%
 				doi=true,%
-				maxnames=5,%
-				style=numeric,%
-				sorting=nyt%
+        maxcitenames=2,%
+        mincitenames=1,%
+				maxbibnames=99,%
+				style=authoryear,% alphabetic, numeric
+				sorting=nyt,%
+				backref=true,%
+				dashed=false,%
+        uniquename=false,%
+        uniquelist=false,%
 				]{biblatex}
 \RequirePackage[english]{babel}
 \RequirePackage{microtype}
@@ -310,3 +316,60 @@ auto,
 snake it/.style={decorate, decoration=snake}
 }
 \tikzstyle{every path}=[line width=0.8pt]
+
+
+
+
+% Below is only for the authorstyle in biblatex, makes it interact better with hyperref
+
+\DeclareCiteCommand{\cite}
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\usebibmacro{cite}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand*{\cite}
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\usebibmacro{citeyear}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\parencite}[\mkbibparens]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+    \printtext[bibhyperref]{\usebibmacro{cite}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand*{\parencite}[\mkbibparens]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+    \printtext[bibhyperref]{\usebibmacro{citeyear}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\footcite}[\mkbibfootnote]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+  \printtext[bibhyperref]{ \usebibmacro{cite}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\footcitetext}[\mkbibfootnotetext]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\usebibmacro{cite}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\textcite}
+  {\boolfalse{cbx:parens}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\usebibmacro{textcite}}}
+  {\ifbool{cbx:parens}
+     {\bibcloseparen\global\boolfalse{cbx:parens}}
+     {}%
+   \multicitedelim}
+  {\usebibmacro{textcite:postnote}}
